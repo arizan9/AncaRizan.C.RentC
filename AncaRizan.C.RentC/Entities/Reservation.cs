@@ -11,6 +11,7 @@ namespace AncaRizan.C.RentC.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservationID { get; set; }
+
         public int CarID { get; set; }
 
         public int CostumerID { get; set; }

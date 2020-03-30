@@ -8,12 +8,12 @@ namespace AncaRizan.C.RentC
 {
     class ValidateUserInput
     {
-        public static int ValidateInputiInt(String input)
+        public static int ValidateInputInt(String input)
         {
             int validInputInt;
             while (!int.TryParse(input, out validInputInt))
             {
-                Console.WriteLine("Please enter a number");
+                Console.Write("Please enter a number");
                 input = Console.ReadLine();
             }
             return validInputInt;
@@ -24,7 +24,7 @@ namespace AncaRizan.C.RentC
             DateTime validInputDate;
             while (!DateTime.TryParse(input, out validInputDate))
             {
-                Console.WriteLine("Please enter a date");
+                Console.Write("Please enter a valid date format (mm.dd.yyyy)");
                 input = Console.ReadLine();
             }
             return validInputDate;

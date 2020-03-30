@@ -16,9 +16,9 @@ namespace AncaRizan.C.RentC
             {
                 Console.WriteLine("The end date is sooner then the start date, plase enter a new period" +
                        "\n or type quit to go to main menu!");
-                Console.WriteLine("StartDate:");
+                Console.Write("Start Date (mm.dd.yyyy):");
                 var ans = Console.ReadLine();
-                if (ans == "quit")
+                if (ans.ToUpper() == "QUIT")
                 {
                     MenuPage.SelectOption();
                 }
@@ -26,9 +26,9 @@ namespace AncaRizan.C.RentC
                 {
                     startDate = ValidateUserInput.ValidateInputDate(Console.ReadLine());
                 }
-                Console.WriteLine("StartDate:");
+                Console.WriteLine("End Date (mm.dd.yyyy):");
                 ans = Console.ReadLine();
-                if (ans == "quit")
+                if (ans.ToUpper() == "QUIT")
                 {
                     MenuPage.SelectOption();
                 }
@@ -53,13 +53,13 @@ namespace AncaRizan.C.RentC
                         "\n or type quit to go to main menu!");
                     Console.WriteLine("Client:");
                     var ans = Console.ReadLine();
-                    if (ans == "quit")
+                    if (ans.ToUpper() == "QUIT")
                     {
                         MenuPage.SelectOption();
                     }
                     else
                     {
-                        id = ValidateUserInput.ValidateInputiInt(Console.ReadLine());
+                        id = ValidateUserInput.ValidateInputInt(Console.ReadLine());
                     }
                 }
                 return id;
@@ -77,7 +77,7 @@ namespace AncaRizan.C.RentC
                         "\n or type quit to go to main menu!");
                     Console.WriteLine("Car Plate:");
                     var ans = Console.ReadLine();
-                    if (ans == "quit")
+                    if (ans == "QUIT")
                     {
                         MenuPage.SelectOption();
                     }
@@ -116,7 +116,7 @@ namespace AncaRizan.C.RentC
 
                     Console.WriteLine("Car Plate:");
                     var ans = Console.ReadLine();
-                    if (ans == "quit")
+                    if (ans.ToUpper() == "QUIT")
                     {
                         MenuPage.SelectOption();
                     }

@@ -20,17 +20,17 @@ namespace AncaRizan.C.RentC.MenuOptions
 
 
             Console.Write("Client ID:");
-            var clientID = ValidateUserInput.ValidateInputiInt(Console.ReadLine());
+            var clientID = ValidateUserInput.ValidateInputInt(Console.ReadLine());
             reservation.CostumerID = ReservationManagement.ValidateClient(clientID);
 
 
-            Console.Write("Start Date:");
+            Console.Write("Start Date(mm.dd.yyyy):");
             var startDate = ValidateUserInput.ValidateInputDate(Console.ReadLine());
-            Console.Write("End Date:");
+            Console.Write("End Date(mm.dd.yyyy):");
             var endDate = ValidateUserInput.ValidateInputDate(Console.ReadLine());
 
             reservation.StartDate = ReservationManagement.ValidateDates(startDate, endDate).Item1;
-            reservation.EndDate = ReservationManagement.ValidateDates(startDate, endDate).Item1;
+            reservation.EndDate = ReservationManagement.ValidateDates(startDate, endDate).Item2;
 
 
             Console.Write("Location:");
@@ -54,20 +54,26 @@ namespace AncaRizan.C.RentC.MenuOptions
                 decimal totalPrice;
 
                 Console.WriteLine("The car is available for " + car.PricePerDay + "/day");
-                Console.Write("Do you have a cupone code?\nIf yes enter it, if no type NO");
+                Console.Write("Do you have a cupone code?\nIf yes enter it, if no type NO: ");
                 var ans = Console.ReadLine();
-                if (ans == "NO")
+                if (ans.ToUpper() == "NO")
                 {
                     totalPrice = price;
                 }
                 else
                 {
-                    var cupon = db.Coupons.Find(ValidateUserInput.ValidateInputiInt(ans));
-                    totalPrice = price - (cupon.Discount * price);
+                    var customerCupon = Console.ReadLine();
+                    var cupon = db.Coupons.FirstOrDefault(c => c.CouponCode == customerCupon);
+                    if (cupon != null)
+                    {
+                        Console.WriteLine("Discount: " + cupon.Discount + ": " + cupon.Description);
+                        totalPrice = price - (cupon.Discount * price);
+                    }
+                    totalPrice = price;
                 }
 
                 Console.WriteLine("Total price: " + totalPrice);
-                Console.WriteLine("Save the reservation? Type YES to save NO to go back to main menu ");
+                Console.WriteLine("Save the reservation? Type YES to save \nNO to go back to main menu: ");
 
                 ans = Console.ReadLine();
                 if (ans == "NO")
@@ -76,7 +82,7 @@ namespace AncaRizan.C.RentC.MenuOptions
                 }
                 else
                 {
-                 //   reservation.ReservationStatus = db.ReservationStatuses.Find(1);
+            
                     reservation.ReservStatsID = 1;
                     db.Reservations.Add(reservation);
                     db.SaveChanges();
